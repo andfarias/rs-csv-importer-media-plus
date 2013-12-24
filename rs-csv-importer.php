@@ -25,6 +25,8 @@ if ( !class_exists( 'WP_Importer' ) ) {
 // Load Helpers
 require dirname( __FILE__ ) . '/rs-csv-helper.php';
 require dirname( __FILE__ ) . '/wp_post_helper/class-wp_post_helper.php';
+require dirname( __FILE__ ) . '/rs-csv-post-media-helper.php';
+
 
 /**
  * CSV Importer
@@ -104,8 +106,9 @@ class RS_CSV_Importer extends WP_Importer {
 	* @return int|false Saved post id. If failed, return false.
 	*/
 	function save_post($post,$meta,$terms,$thumbnail,$is_update) {
-		$ph = new wp_post_helper($post);
-		
+		$ph = new RS_CSV_Post_Media_Helper($post);
+
+
 		foreach ($meta as $key => $value) {
 			$is_acf = 0;
 			if (function_exists('get_field_object')) {
@@ -117,23 +120,29 @@ class RS_CSV_Importer extends WP_Importer {
 					}
 				}
 			}
-			if (!$is_acf)
+			if (!$is_acf) {
+				if($ph->is_media($value)) {
+					$value = $ph->migrate_media($value);
+				}
+
 				$ph->add_meta($key,$value,true);
+
+			}
 		}
 
 		foreach ($terms as $key => $value) {
 			$ph->add_terms($key, $value);
 		}
-		
+
 		if ($thumbnail) $ph->add_media($thumbnail,'','','',true);
-		
+
 		if ($is_update)
 			$result = $ph->update();
 		else
 			$result = $ph->insert();
-		
+
 		unset($ph);
-		
+
 		return $result;
 	}
 
