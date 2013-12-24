@@ -106,7 +106,7 @@ class RS_CSV_Importer extends WP_Importer {
 	* @return int|false Saved post id. If failed, return false.
 	*/
 	function save_post($post,$meta,$terms,$thumbnail,$is_update) {
-		$ph = new RS_CSV_Post_Media_Helper($post);
+		$ph = new RS_CSV_Post_Media_Helper( new wp_post_helper($post));
 
 
 		foreach ($meta as $key => $value) {
@@ -122,11 +122,9 @@ class RS_CSV_Importer extends WP_Importer {
 			}
 			if (!$is_acf) {
 				if($ph->is_media($value)) {
-					$value = $ph->migrate_media($value);
+					$ph->queue_media($key,$value);
 				}
-
 				$ph->add_meta($key,$value,true);
-
 			}
 		}
 
@@ -140,6 +138,8 @@ class RS_CSV_Importer extends WP_Importer {
 			$result = $ph->update();
 		else
 			$result = $ph->insert();
+
+		$ph->migrate_medias();
 
 		unset($ph);
 
