@@ -1,10 +1,15 @@
 # Really Simple CSV Importer Media Plus
 
-Really Simple CSV Importerのアドオンとして作り直しました。
-[RS CSV Importer Media Add-On](https://github.com/torounit/rs-csv-importer-media-addon)
+----
 
-今後はこっちをお使い下さい。
+## Note
 
+**Really Simple CSV Importerのアドオンとして作り直しました。
+[RS CSV Importer Media Add-On](https://github.com/torounit/rs-csv-importer-media-addon)**
+
+**今後はこっちをお使い下さい。**
+
+----
 
 forked Really Simple CSV Importer for WordPress 
 http://wordpress.org/plugins/really-simple-csv-importer/
