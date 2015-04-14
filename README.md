@@ -1,13 +1,17 @@
 # Really Simple CSV Importer Media Plus
 
-----
-
 ## Note
 
-**Really Simple CSV Importerのアドオンとして作り直しました。
-[RS CSV Importer Media Add-On](https://github.com/torounit/rs-csv-importer-media-addon)**
+##[RS CSV Importer Media Add-On](https://github.com/torounit/rs-csv-importer-media-addon)
+
+**Really Simple CSV Importerのアドオンとして作り直しました。**
 
 **今後はこっちをお使い下さい。**
+
+
+
+
+
 
 ----
 
@@ -17,7 +21,6 @@ http://wordpress.org/plugins/really-simple-csv-importer/
 インポート時に画像のURLがあった場合、ダウンロードし、画像IDとしてカスタムフィールドに保存します。
 
 画像の判別はURLの拡張子で行っています。
-
 
 ## License
 GPLv2 or Later.
